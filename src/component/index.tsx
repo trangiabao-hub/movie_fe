@@ -8,8 +8,8 @@ interface MoviesProps {
 const MoviesComponent: FC<MoviesProps> = ({ api }) => {
   const [movies, setMovies] = useState<Movies[]>([]);
 
-  const handleFetchMoviesSuccess = (response: AxiosResponse<Movies[]>) => {
-    setMovies(response.data);
+  const handleFetchMoviesSuccess = (response: any) => {
+    setMovies(response.data.results);
   };
 
   const fetchMovie = () => {
@@ -24,15 +24,10 @@ const MoviesComponent: FC<MoviesProps> = ({ api }) => {
 
   return (
     <div>
-      {movies.map((movie: Movies) => {
-        return (
-          <div className="movie">
-            <h2>{movie.name}</h2>
-            <img src={movie.image} width={300} alt="" />
-            <h5>{movie.actorName}</h5>
-          </div>
-        );
-      })}
+      <h1>Example Page</h1>
+      {movies?.map((item) => (
+        <h3 key={item.name}>{item.name}</h3>
+      ))}
     </div>
   );
 };
