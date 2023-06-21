@@ -1,4 +1,11 @@
 .home {
   background-color: #06152d;
   min-height: 100vh;
+
+  .list-movie {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 200px;
+  }
 }

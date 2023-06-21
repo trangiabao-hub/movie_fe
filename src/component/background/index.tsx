@@ -1,17 +1,14 @@
 import { useState } from "react";
 import "./index.scss";
 import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Background = () => {
   const [searchText, setSearchText] = useState("");
+  const navigate = useNavigate();
 
   const handleSearch = () => {
-    axios
-      .get(`http://localhost:8080/movie-by-name?movieName=${searchText}`)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch();
+    navigate(`/search/${searchText}`);
   };
 
   return (
