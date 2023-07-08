@@ -4,19 +4,18 @@ import "./style.scss";
 import { useEffect, useState } from "react";
 import { Movie } from "../../models/movies";
 import MovieCard from "../../component/movie-card";
+import api from "../../config/axios";
 
 const Home = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const importAuto = () => {
     axios
-      .get(
-        `https://api.themoviedb.org/3/movie/top_rated?api_key=a10ee5569194b352bcca20840b7f8a32&language=en-US`
-      )
+      .get(`https://api.themoviedb.org/3/movie/top_rated?api_key=a10ee5569194b352bcca20840b7f8a32&language=en-US`)
       .then((response) => {
         const myMovie = mapToMyMovies(response.data.results);
 
-        axios
-          .post("http://localhost:8080/movies", myMovie)
+        api
+          .post("/movies", myMovie)
           .then((response) => {
             console.log(response);
           })
@@ -37,8 +36,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/movie`)
+    api
+      .get(`/movie`)
       .then((response) => {
         setMovies(response.data);
       })
@@ -48,7 +47,7 @@ const Home = () => {
   return (
     <div className="home">
       <Background />
-      {/* <button onClick={importAuto}>import auto</button> */}
+      <button onClick={importAuto}>import auto</button>
 
       <div className="list-movie">
         {movies.map((movie) => {
